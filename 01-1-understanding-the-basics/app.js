@@ -29,6 +29,7 @@ const server = http.createServer((req, res) => {
       // Split key value pair string based on '=' --- Not a great solution but simple example
       const message = parsedBody.split('=')[1];
       // Write parsed data to message.txt file 
+      // This currently used the synchronous method for writing a file and will block the next actions
       fs.writeFileSync(`message.txt`, message);
       // Set redirection status code and header to reroute to homepage
       res.statusCode = 302;
