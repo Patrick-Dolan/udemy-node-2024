@@ -29,10 +29,18 @@ const requestHandler = (req, res) => {
   }
 
   if (url === "/create-user" && method === "POST") {
-    console.log("User submitted");
-    res.statusCode = 302;
-    res.setHeader("Location", "/");
-    return res.end();
+    const body = [];
+    req.on("data", (chunk) => {
+      body.push(chunk);
+    });
+    return req.on("end", () => {
+      const parsedBody = Buffer.concat(body).toString();
+      const username = parsedBody.split("=")[1];
+      console.log(username);
+      res.statusCode = 302;
+      res.setHeader("Location", "/");
+      return res.end();
+    });
   }
 
   res.write("<html>");
