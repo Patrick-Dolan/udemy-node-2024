@@ -39,7 +39,7 @@ const requestHandler = (req, res) => {
       console.log(username);
       res.statusCode = 302;
       res.setHeader("Location", "/");
-      return res.end();
+      res.end();
     });
   }
 
