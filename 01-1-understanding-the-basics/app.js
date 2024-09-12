@@ -29,12 +29,15 @@ const server = http.createServer((req, res) => {
       // Split key value pair string based on '=' --- Not a great solution but simple example
       const message = parsedBody.split('=')[1];
       // Write parsed data to message.txt file 
-      // This currently used the synchronous method for writing a file and will block the next actions
-      fs.writeFileSync(`message.txt`, message);
-      // Set redirection status code and header to reroute to homepage
-      res.statusCode = 302;
-      res.setHeader('Location', '/');
-      return res.end();
+      // This uses the async method for writing to the file system
+      // !!! Async methods should be used whenever possible !!!
+      fs.writeFile(`message.txt`, message, (err) => {
+        if (err) throw err;
+        // Set redirection status code and header to reroute to homepage
+        res.statusCode = 302;
+        res.setHeader('Location', '/');
+        return res.end();
+      });
     });
   }
   // Default response configured to send a webpage with the url displayed
