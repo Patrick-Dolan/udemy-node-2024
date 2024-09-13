@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "start": "tsc && node dist/app.js"
+  },
   "devDependencies": {
     "@types/node": "^22.5.4"
   }
