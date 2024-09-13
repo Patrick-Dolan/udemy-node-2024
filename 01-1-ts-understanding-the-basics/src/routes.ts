@@ -1,5 +1,8 @@
 import { IncomingMessage, ServerResponse } from "http";
-import fs from "fs";
+// import fs from "fs";
+
+// Current version is set to use this global variable to list off messages as they are send via the homepage form.
+const messages: string[] = [];
 
 export const requestHandler = (req: IncomingMessage, res: ServerResponse) => {
   const url = req.url;
@@ -13,6 +16,15 @@ export const requestHandler = (req: IncomingMessage, res: ServerResponse) => {
     res.write(
       '<form action="/create-message" method="POST"><input name="message"><button>Send</button></form>'
     );
+    if (messages.length < 1) {
+      res.write("<p>No messages to display.</p>");
+    } else {
+      res.write("<ol>");
+      messages.map((message) => {
+        res.write(`<li>${message}</li>`);
+      });
+      res.write("</ol>");
+    }
     res.write("</body>");
     res.write("</html>");
     return res.end();
@@ -26,16 +38,21 @@ export const requestHandler = (req: IncomingMessage, res: ServerResponse) => {
     return req.on("end", () => {
       const parsedBody = Buffer.concat(body).toString();
       const messageText = parsedBody.split("=")[1];
-      fs.writeFile(
-        `./dist/message-${Math.random()}.txt`,
-        messageText,
-        (err) => {
-          if (err) throw err;
-          res.statusCode = 302;
-          res.setHeader("Location", "/");
-          res.end();
-        }
-      );
+      messages.push(messageText);
+      res.statusCode = 302;
+      res.setHeader("Location", "/");
+      res.end();
+      // File writing version
+      // fs.writeFile(
+      //   `./dist/message-${Math.random()}.txt`,
+      //   messageText,
+      //   (err) => {
+      //     if (err) throw err;
+      //     res.statusCode = 302;
+      //     res.setHeader("Location", "/");
+      //     res.end();
+      //   }
+      // );
     });
   }
 
