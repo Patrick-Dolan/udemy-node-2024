@@ -3,6 +3,10 @@ import path from "path";
 
 import srcDir from "../utils/srcDir";
 
+type Product = {
+  title: string;
+};
+
 const router = express.Router();
 
 router.get("/add-product", (req, res, next) => {
@@ -10,7 +14,8 @@ router.get("/add-product", (req, res, next) => {
 });
 
 router.post("/add-product", (req, res, next) => {
-  console.log(req.body);
+  const product = req.body as Product;
+  console.log(product);
   res.redirect("/");
 });
 
