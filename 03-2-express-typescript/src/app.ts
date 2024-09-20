@@ -11,6 +11,7 @@ import srcDir from "./utils/srcDir";
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(srcDir, "public")));
 
 app.use("/admin", adminRoutes);
 app.use(shopRoutes);
