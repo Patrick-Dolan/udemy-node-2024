@@ -1,5 +1,5 @@
 {
-  "name": "02-1-workflow-and-debugging",
+  "name": "04-1-dynamic-content-pug",
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
