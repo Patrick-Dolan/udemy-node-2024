@@ -1,5 +1,5 @@
 {
-  "name": "04-3-dynamic-content-ejs",
+  "name": "04-3-dynamic-content-ejs-partials-refactor",
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
