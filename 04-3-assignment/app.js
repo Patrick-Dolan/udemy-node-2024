@@ -2,14 +2,15 @@
 // [X] Create a npm project and install Express.js, and a template engine of your choice.
 // Add two routes:
 //  [X] "/" will hold a <form> that allows users to input their name
-//  [ ] "/users" outputs a <ul> with the user names (or some error text)
-// [ ] use layouts/partials in whatever template engine you use.
+//  [X] "/users" outputs a <ul> with the user names (or some error text)
+// [X] use layouts/partials in whatever template engine you use.
 
 // Core imports
 const path = require('path');
 
 // Third party packages
 const express = require('express');
+const bodyParser = require('body-parser');
 
 // Local imports
 const userRoutes = require('./routes/users');
@@ -20,6 +21,8 @@ const app = express();
 app.set('view engine', 'ejs');
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(userRoutes);
 

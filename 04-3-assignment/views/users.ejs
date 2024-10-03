@@ -6,11 +6,15 @@
   <body>
     <main>
       <h1>Users</h1>
+      <% if (users && users.length > 0) { %>
       <ul>
-        <li>User 1</li>
-        <li>User 2</li>
-        <li>User 3</li>
+        <% users.forEach((user) => { %>
+        <li><%= user.username %></li>
+        <% }); %>
       </ul>
+      <% } else { %>
+      <p>No users.</p>
+      <% } %>
     </main>
   </body>
 </html>
