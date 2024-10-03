@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'views', 'add-user.html'));
+  res.render('add-user', { docTitle: 'Add User' });
 });
 
 router.post('/add-user', (req, res) => {

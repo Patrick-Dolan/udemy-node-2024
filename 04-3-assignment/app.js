@@ -15,6 +15,8 @@ const userRoutes = require('./routes/users');
 // App
 const app = express();
 
+app.set('view engine', 'ejs');
+
 app.use(userRoutes);
 
 app.use('/', (req, res) => {
